@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Flores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input[type="text"], input[type="radio"], input[type="checkbox"] {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .radio-group, .checkbox-group {
+            margin-bottom: 15px;
+        }
+        .radio-group label, .checkbox-group label {
+            margin-left: 5px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .radio-group input, .checkbox-group input {
+            margin-right: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Flores</h1>
+
+        <form id="formFlor">
+            <label for="nome">Nome da Flor:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="cor">Cor:</label>
+            <input type="text" id="cor" name="cor" required>
+
+            <label for="tempoFloracao">Tempo de Floração (Escolha as estações):</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="verao" name="tempoFloracao" value="Verão">
+                <label for="verao">Verão</label>
+
+                <input type="checkbox" id="outono" name="tempoFloracao" value="Outono">
+                <label for="outono">Outono</label>
+
+                <input type="checkbox" id="inverno" name="tempoFloracao" value="Inverno">
+                <label for="inverno">Inverno</label>
+
+                <input type="checkbox" id="primavera" name="tempoFloracao" value="Primavera">
+                <label for="primavera">Primavera</label>
+            </div>
+
+            <label for="perfumada">É Perfumada:</label>
+            <input type="checkbox" id="perfumada" name="perfumada">
+
+            <label for="tamanho">Tamanho:</label>
+            <div class="radio-group">
+                <input type="radio" id="pequena" name="tamanho" value="Pequena">
+                <label for="pequena">Pequena</label>
+
+                <input type="radio" id="media" name="tamanho" value="Média">
+                <label for="media">Média</label>
+
+                <input type="radio" id="grande" name="tamanho" value="Grande">
+                <label for="grande">Grande</label>
+            </div>
+
+            <label for="uso">Uso:</label>
+            <input type="text" id="uso" name="uso" required>
+
+            <button type="button" onclick="cadastrarFlor()">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+        function cadastrarFlor() {
+            const nome = document.getElementById('nome').value;
+            const cor = document.getElementById('cor').value;
+            
+            // Coletando as estações de floração selecionadas
+            const tempoFloracao = [];
+            const tempoFloracaoCheckboxes = document.querySelectorAll('input[name="tempoFloracao"]:checked');
+            tempoFloracaoCheckboxes.forEach(checkbox => tempoFloracao.push(checkbox.value));
+            
+            const perfumada = document.getElementById('perfumada').checked ? 'Sim' : 'Não';
+            
+            // Coletando o tamanho selecionado
+            const tamanho = document.querySelector('input[name="tamanho"]:checked')?.value || 'Não especificado';
+            
+            const uso = document.getElementById('uso').value;
+
+            // Exibindo os dados cadastrados
+            alert(`Flor Cadastrada: \nNome: ${nome}\nCor: ${cor}\nTempo de Floração: ${tempoFloracao.join(", ")}\nPerfumada: ${perfumada}\nTamanho: ${tamanho}\nUso: ${uso}`);
+
+            // Limpar o formulário após cadastro
+            document.getElementById('formFlor').reset();
+        }
+    </script>
+</body>
+</html>
